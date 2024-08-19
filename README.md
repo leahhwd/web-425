@@ -1,2 +1,5 @@
-# web-425
-Assignments for Web 425-O306
+# WEB 425 Angular with TypeScript 
+
+## Contributors 
+* Richard Krasso
+* Leah Harris 

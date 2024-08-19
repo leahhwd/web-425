@@ -1,0 +1,86 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Oswald:wght@300&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" );
+
+body, header, nav, main, section, footer, img, figure, figcaption, div, ul{
+ margin: 0;
+ padding: 0;
+ border: 0;
+}
+
+body {
+  height: 100%
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0 auto;
+  width: 100%;
+  background-color: #d4e4fc;
+  color:black;
+}
+
+.banner {
+  background-size: cover;
+  background-color: black;
+
+}
+
+.banner-img {
+  max-width: 100%;
+  height: auto;
+  background-size: cover;
+
+}
+
+.main-content {
+  display: flex;
+  flex: 1;
+}
+
+.navbar {
+  flex: 0 0 200px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat';
+}
+
+.navbar ul{
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar li {
+  padding: 10px;
+  font-family: 'Oswald';
+  font-weight: bold;
+  float: left;
+  text-align: center;
+  font-size: larger;
+}
+
+.navbar a {
+  text-decoration: none;
+  display: block;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  font-family: 'Poppins';
+}
+
+.footer {
+  text-align: center;
+  padding: 20px;
+  font-family: 'Oswald';
+}
+.footer a:hover {
+  text-decoration: underline;
+}
