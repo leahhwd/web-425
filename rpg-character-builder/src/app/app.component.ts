@@ -11,14 +11,19 @@ import { RouterLink, RouterOutlet } from '@angular/router';
     <img src="/assets/cover.jpg" alt="website banner for rpg character creation" class="banner img">
    </header>
 
+   <div class="sign-in-container">
+    <a routerLink="/signin" class="sign-in-link">Sign In</a>
+   </div>
+
    <main class="main content">
 
     <nav class="navbar">
      <ul>
       <li><a routerLink="/">Home</a></li>
-      <li><a href="#">Create Characters</a></li>
-      <li><a href="#">View Characters</a></li>
-      <li><a href="#">About</a></li>
+      <li><a routerLink="/players">Players</a></li>
+      <li><a routerLink="/create-character">Create Character</a></li>
+      <li><a routerLink="/create-guild">Create Guild</a></li>
+      <li><a routerLink="/character-faction">Character Faction</a></li>
      </ul>
     </nav>
 
@@ -29,12 +34,12 @@ import { RouterLink, RouterOutlet } from '@angular/router';
    </main>
 
    <footer class="footer">
-     <nav class="footer-nav">
-      <a routerLink="/">Home</a> |
-      <a href="#">Create Characters</a> |
-      <a href="#">View Characters</a> |
-      <a href="#">About</a> |
-     </nav>
+     <a routerLink="/">Home</a> |
+     <a routerLink="/players">Players</a> |
+     <a routerLink="/create-character">Create Character</a> |
+     <a routerLink="/create-guild">Create Guild</a> |
+     <a routerLink="/character-faction">Character Faction</a>
+
      <p>&copy; 2024 RPG Character Builder</p>
     </footer>
    </div>
@@ -43,8 +48,18 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   `,
   styles: [
     `
+    .sign-in-container {
+      text-align: right;
+      padding-right: 30px;
+      margin-top: 20px;
+    }
 
-
+    .sign-in-link {
+      color: #6B8282;
+      text-decoration: none;
+      font-family: 'Oswald';
+      font-size: 20px;
+    }
     `
   ]
 })
