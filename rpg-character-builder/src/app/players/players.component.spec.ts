@@ -17,7 +17,16 @@ describe('PlayersComponent', () => {
     fixture.detectChanges();
   });
 
+  //unit test 1 (default test)
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  //unit test 2
+  it('should correctly display a list of characters', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    const characters = compiled.querySelectorAll('.player-options');
+
+    expect(characters.length).toEqual(component.players.length);
   });
 });

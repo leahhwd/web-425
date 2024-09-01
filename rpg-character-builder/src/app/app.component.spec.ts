@@ -1,10 +1,34 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
+import { RouterTestingModule } from '@angular/router/testing';
+import { PlayersComponent } from './players/players.component';
+import { Routes, Router } from '@angular/router';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
+
+    const activatedRouteStub = {
+      snapshot: {
+        paramMap: {
+          get: () => 'staticValue',
+        },
+      },
+      queryParams: of({}),
+    };
+
+    const routes: Routes = [
+      {path: 'players', component: PlayersComponent}
+    ]
     await TestBed.configureTestingModule({
-      imports: [AppComponent],
+      imports: [
+        RouterTestingModule.withRoutes(routes),
+        PlayersComponent
+      ],
+      providers: [
+        { provide: ActivatedRoute, useValue: activatedRouteStub }
+      ]
     }).compileComponents();
   });
 
@@ -14,16 +38,14 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'rpg-character-builder' title`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('rpg-character-builder');
-  });
+  //Week 3 Unit test
+  it('should have the correct route for the PlayersComponenet', () => {
+    const router = TestBed.inject(Router);
+    const route = router.config.find(r => r.path === 'players');
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, rpg-character-builder');
+    expect(route).toBeDefined();
+    if(route) {
+      expect(route.component).toBe(PlayersComponent);
+    }
   });
 });

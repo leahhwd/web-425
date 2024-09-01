@@ -20,4 +20,16 @@ describe('MenuComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+//Unit test 2
+  it('should correctly display a list of tacos', () => {
+    const compiled = fixture.nativeElement as HTMLElement; //get compiled html of component
+    const menuItems = compiled.querySelectorAll('.menu-item'); //get all menu items
+
+    expect(menuItems.length).toEqual(component.menu.length);
+  });
 });
+
+
+
+
