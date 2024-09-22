@@ -86,7 +86,7 @@ import { CommonModule } from '@angular/common';
     }
 
     label, select, name-input {
-      display: block;
+      display: inline-block;
       margin-bottom: 5px;
     }
 
