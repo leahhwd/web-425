@@ -6,14 +6,15 @@ export interface Guild {
   notificationPref: string;
 }
 
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { GuildListComponent } from '../guild-list/guild-list.component';
 
 @Component({
   selector: 'app-create-guild',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, GuildListComponent],
   template: `
    <div class="create-guild-container">
     <div class="form-container">
@@ -61,18 +62,7 @@ import { CommonModule } from '@angular/common';
     </div>
 
     <div class="guild-container">
-      <h1>Created Guilds:</h1>
-       @if(guilds.length > 0) {
-        <ul>
-         @for(guilds of guilds; track guilds) {
-          <li>
-           <strong>Guild Name:</strong> {{ guilds.guildName }}
-           <strong>Description:</strong> {{ guilds.description }}
-           <strong>Guild Type:</strong> {{ guilds.type }}
-          </li>
-         }
-        </ul>
-       }
+      <app-guild-list [guilds]="guilds"></app-guild-list>
     </div>
    </div>
 
@@ -142,13 +132,6 @@ import { CommonModule } from '@angular/common';
     list-style: none;
   }
 
-  .guild-container ul li {
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid;
-    border-radius: 5px;
-  }
-
 
   `
 })
@@ -156,21 +139,27 @@ export class CreateGuildComponent {
 guilds: Guild[] = [];
 
   guildName: string='';
-description: string='';
-type: string='';
-acceptTerms: boolean=false;
-notifPref: string='';
+  description: string='';
+  type: string='';
+  acceptTerms: boolean=false;
+  notifPref: string='';
+
+@Output() guildUpdated = new EventEmitter<Guild>();
 
 
 createGuild() {
   if (this.guildName && this.description && this.type && this.acceptTerms && this.notifPref) {
-    this.guilds.push({
+    const newGuild: Guild = ({
       guildName: this.guildName,
       description: this.description,
       type: this.type,
       acceptTerms: this.acceptTerms,
       notificationPref: this.notifPref
     });
+
+    this.guilds.push(newGuild);
+
+    this.guildUpdated.emit(newGuild)
     this.resetForm();
   }
 }

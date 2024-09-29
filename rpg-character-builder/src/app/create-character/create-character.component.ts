@@ -6,14 +6,15 @@ export interface Character {
 }
 
 
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { CharacterListComponent } from '../character-list/character-list.component';
 
 @Component({
   selector: 'app-create-character',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, CharacterListComponent],
   template: `
     <div class="characters-form-container">
      <form class="character-form" #characterCreationForm = "ngForm" (ngSubmit)="onSubmit(characterCreationForm)" (reset)="resetForm()">
@@ -48,18 +49,7 @@ import { CommonModule } from '@angular/common';
      </form>
 
      <div class="created-characters">
-      <h1>Characters:</h1>
-      @if(characters.length > 0){
-       <ul>
-        @for(characters of characters; track characters){
-         <li>
-          <strong>Name: </strong> {{ characters.name }}
-          <strong>Gender: </strong> {{ characters.gender }}
-          <strong>Class: </strong> {{ characters.class }}
-         </li>
-        }
-       </ul>
-      }
+      <app-character-list [characters]="characters"></app-character-list>
      </div>
     </div>
 
@@ -102,10 +92,6 @@ import { CommonModule } from '@angular/common';
       float: right;
     }
 
-    .create-characters li {
-      margin-bottom: 10px;
-      padding: 5px;
-    }
     `
   ]
 })
@@ -115,6 +101,8 @@ export class CreateCharacterComponent {
  name: string = '';
  gender: string = '';
  class: string = '';
+
+ @Output() characterUpdated = new EventEmitter<Character>();
 
 
   constructor() {
@@ -142,9 +130,11 @@ export class CreateCharacterComponent {
      };
 
      this.characters.push(newCharacter);
+     this.characterUpdated.emit(newCharacter);
+
      this.resetForm();
    } else {
-     console.error('Character not created')
+     console.error('Character not created');
    }
  }
  resetForm () {
